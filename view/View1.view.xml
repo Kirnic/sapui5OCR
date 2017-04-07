@@ -1,0 +1,30 @@
+<mvc:View 
+  controllerName="temp.controller.View1" 
+  xmlns:html="http://www.w3.org/1999/xhtml" 
+  xmlns:mvc="sap.ui.core.mvc" 
+  xmlns:z="temp.zlib" 
+  xmlns="sap.m">
+	<App>
+		<pages>
+			<Page title="OCR">
+        <content>
+          <HBox width="100%" justifyContent="SpaceAround">
+            <items>
+              <Button width="150px" id="captureBtn" press="capturePhoto" icon="sap-icon://camera"/>
+              <Button width="150px" id="recognizeBtn" activeIcon="sap-icon://action" icon="sap-icon://action" press="recognizeText" enabled="false"/>
+            </items>
+          </HBox>
+          <HBox width="100%" id="__hbox1" justifyContent="Center">
+            <z:Video id="videoFrame" width="500px" height="320px"></z:Video>
+            <z:Canvas id="canvas"></z:Canvas>
+          </HBox>
+          <HBox width="100%" id="__hbox2" justifyContent="Center">
+            <items>
+              <TextArea id="recognizedText" width="250px" rows="5"/>
+            </items>
+          </HBox>
+        </content>
+      </Page>
+		</pages>
+	</App>
+</mvc:View>

@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta charset="UTF-8">
+
+		<title>Recognizer</title>
+
+    <script id="sap-ui-bootstrap"
+			src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"
+			data-sap-ui-libs="sap.m"
+			data-sap-ui-theme="sap_belize"
+			data-sap-ui-compatVersion="edge"
+			data-sap-ui-resourceroots='{"temp": ""}'>
+		</script>
+
+    <script>
+			sap.ui.getCore().attachInit(function () {
+          sap.ui.require([
+            "sap/ui/core/ComponentContainer", 
+            "temp/Component"
+          ],
+            function (ComponentContainer, Component) {
+              new ComponentContainer({
+                height: "100%", 
+                component: new Component({
+                  id: "mvcAppComponent"
+                })
+              }).placeAt("content");
+            });
+        });
+		</script>
+		
+
+    <script src='https://cdn.rawgit.com/naptha/tesseract.js/1.0.10/dist/tesseract.js'></script>
+	</head>
+
+	<body class="sapUiBody">
+    <div id="content"></div>
+	</body>
+
+</html>
