@@ -2,6 +2,7 @@ sap.ui.define([
   'sap/ui/core/Control',
   'sap/m/MessageToast'
 ], function (Control, MessageToast) {
+  'use strict';
   return Control.extend('temp.zlib.Video', {
     metadata: {
       properties: {
@@ -19,10 +20,6 @@ sap.ui.define([
         fitInContainer: {
           type: 'boolean',
           defaultValue: false
-        },
-        hidden: {
-          type: 'boolean',
-          defaultValue: true
         }
       }
     },
@@ -48,24 +45,44 @@ sap.ui.define([
       this.setStreamUrl(streamUrl);
     },
 
-    setHidden: function (bMode) {
-      this.$().context.hidden = bMode;
+    _stopStream: function () {
+      this.setStreamUrl("#"); 
     },
 
+    setWidth: function (sValue) {
+      this.setProperty("width", sValue, true);
+      this.$().css("width", this.getWidth());
+
+      return this;
+    },
+
+    getWidth: function () {
+      return this.getProperty("width");
+    },
+
+    setHeight: function (sValue) {
+      this.setProperty("height", sValue, true);
+      this.$().css("height", this.getHeight());
+
+      return this;
+    },
+
+    getHeight: function () {
+      return this.getProperty("height");
+    },
+
+    _getTag: function () {
+      return this.$().context;
+    },
+    
     renderer: function (oRm, oControl) {
-      oRm.write('<video');
+      oRm.write('<video ');
       oRm.writeControlData(oControl);
       oRm.writeAttribute('autoplay', '');
-      oRm.writeAttribute('hidden', oControl.getHidden());
-      if(oControl.getFitInContainer()){
-        var oContainer = oControl.$().parent(); 
-        oRm.writeAttribute('width', oContainer.width());
-        oRm.writeAttribute('height', oContainer.height());
 
-      } else {
-        oRm.writeAttribute('width', oControl.getWidth());
-        oRm.writeAttribute('height', oControl.getHeight());
-      }
+      oRm.writeAttribute('width', oControl.getWidth());
+      oRm.writeAttribute('height', oControl.getHeight());
+
       if(oControl.getStreamUrl()){
         oRm.writeAttribute('src', oControl.getStreamUrl());
       }

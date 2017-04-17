@@ -1,28 +1,89 @@
 <mvc:View 
   controllerName="temp.controller.View1" 
-  xmlns:html="http://www.w3.org/1999/xhtml" 
   xmlns:mvc="sap.ui.core.mvc" 
   xmlns:z="temp.zlib" 
   xmlns="sap.m">
 	<App>
 		<pages>
-			<Page title="OCR">
+			<Page
+        id="ocrPage" 
+        title="OCR">
         <content>
-          <HBox width="100%" justifyContent="SpaceAround">
+          <HBox
+            id="videoTogglePanel" 
+            width="100%" 
+            justifyContent="Center">
+            <ToggleButton 
+              id="enableCamBtn" 
+              width="150px" 
+              press="onEnableCamera" 
+              icon="sap-icon://activate"/>
+          </HBox>
+          <VBox
+            id="videoCapturePanel" 
+            width="100%" 
+            direction="Column" 
+            justifyContent="Center" 
+            alignItems="Center"
+            visible="false">
+              <items>
+                  <z:Video 
+                    id="videoFrame" 
+                    width="100%" 
+                    height="auto"/>
+                  <Button 
+                    id="videoCaptureBtn" 
+                    width="150px" 
+                    press="onCaptureVideo" 
+                    icon="sap-icon://camera"/>
+              </items>
+          </VBox>
+          <HBox
+            id="snapShotPanel" 
+            width="100%" 
+            justifyContent="Center" 
+            alignItems="Center"
+            visible="false">
+                <z:Canvas 
+                  id="snapShot"/>
+          </HBox>
+          <HBox 
+            id="editPanel"
+            width="100%" 
+            justifyContent="SpaceAround"
+            visible="false">
             <items>
-              <Button width="150px" id="captureBtn" press="capturePhoto" icon="sap-icon://camera"/>
-              <Button width="150px" id="recognizeBtn" activeIcon="sap-icon://action" icon="sap-icon://action" press="recognizeText" enabled="false"/>
+              <Button 
+                id="resetBtn" 
+                type="Reject"
+                width="150px" 
+                press="onResetCrop" 
+                icon="sap-icon://reset"/>
+              <Button
+                id="submitBtn"
+                type="Accept"
+                width="150px"  
+                icon="sap-icon://accept" 
+                press="onSubmitCrop"/>
             </items>
           </HBox>
-          <HBox width="100%" id="__hbox1" justifyContent="Center">
-            <z:Video id="videoFrame" width="500px" height="320px"></z:Video>
-            <z:Canvas id="canvas"></z:Canvas>
-          </HBox>
-          <HBox width="100%" id="__hbox2" justifyContent="Center">
+          <VBox 
+            id="outputField"
+            width="100%" 
+            alignItems="Center"
+            visible="false">
             <items>
-              <TextArea id="recognizedText" width="250px" rows="5"/>
+              <TextArea 
+                id="recognizedText" 
+                width="300px" 
+                rows="5"/>
+              <ProgressIndicator
+                id="recognizeProgressBar"
+                height="10px"
+                width="300px"
+                state="Success"/>
             </items>
-          </HBox>
+          </VBox>
         </content>
       </Page>
 		</pages>
